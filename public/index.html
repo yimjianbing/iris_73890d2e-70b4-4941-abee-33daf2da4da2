@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine, Janelle?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Pacifico&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        .valentine-font {
+            font-family: 'Pacifico', cursive;
+        }
+        
+        .floating-heart {
+            position: absolute;
+            color: #ef4444;
+            animation: float-up 6s ease-in-out infinite;
+            opacity: 0.6;
+            z-index: 0;
+        }
+        
+        @keyframes float-up {
+            0% { transform: translateY(100vh) scale(0.5) rotate(0deg); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-20vh) scale(1.2) rotate(360deg); opacity: 0; }
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 20px 40px rgba(244, 114, 182, 0.2);
+        }
+        
+        .btn-bounce:hover {
+            animation: bounce 0.5s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .shake {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center relative">
+
+    <!-- Floating Background Hearts -->
+    <div id="background-hearts" class="absolute inset-0 pointer-events-none overflow-hidden"></div>
+
+    <main class="relative z-10 w-full max-w-md p-6">
+        <div id="main-card" class="glass-card rounded-3xl p-8 text-center transform transition-all duration-500 hover:scale-[1.02]">
+            
+            <!-- Step 1: Initial Question -->
+            <div id="step-1" class="space-y-6">
+                <div class="relative w-48 h-48 mx-auto mb-6 rounded-full overflow-hidden border-4 border-white shadow-lg bg-pink-100 flex items-center justify-center">
+                    <img id="main-image" src="artifacts/user_couple_photo.png" alt="Cute Couple" class="w-full h-full object-cover">
+                </div>
+                
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Hey <span class="text-pink-500 font-bold">Mimi</span>!</h1>
+                <p class="text-lg text-pink-400 font-medium -mt-2 mb-4">i loiks u :3</p>
+                <p class="text-lg text-gray-600 leading-relaxed">i got question for you </p>
+                
+                <div class="pt-4">
+                    <button onclick="nextStep()" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition hover:scale-105 active:scale-95 text-lg btn-bounce">
+                        wat
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 2: The Proposal -->
+            <div id="step-2" class="hidden space-y-8">
+                <h2 class="text-4xl md:text-5xl font-bold text-pink-600 mb-4 leading-tight">Will you be my<br>Valentine, Janelle?</h2>
+                
+                <div class="flex flex-col gap-4 justify-center items-center min-h-[120px] relative">
+                    <button id="yes-btn" onclick="acceptProposal()" class="w-full max-w-[200px] bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-full shadow-xl transform transition hover:scale-110 text-xl z-20">
+                        YES!
+                    </button>
+                    
+                    <button id="no-btn" onclick="dodgeNo()" class="w-full max-w-[200px] bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold py-3 px-6 rounded-full shadow-md transition-all duration-200 text-sm z-10">
+                        No
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 3: Success! -->
+            <div id="step-3" class="hidden space-y-6">
+                <div class="w-full h-48 mx-auto mb-4 relative">
+                     <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeDdmZHRuOXJ6dGd5bmE5bzN5eGZ4bmE5bzN5eGZ4bmE5bzN5eGZ4biZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26BRv0ThflsHCqDrG/giphy.gif" alt="Celebration" class="w-full h-full object-contain rounded-xl">
+                </div>
+                
+                <h2 class="text-3xl font-bold text-gray-800">Yay! Janelle, you've made me<br><span class="text-pink-500 valentine-font">so happy!</span> 🎉</h2>
+                <p class="text-gray-600 text-lg">I can't wait to celebrate our love! ❤️</p>
+                
+                <div class="mt-6 p-4 bg-pink-50 rounded-xl border border-pink-100">
+                    <p class="text-sm text-pink-400 font-semibold uppercase tracking-wider mb-1">Date Details</p>
+                    <p class="text-gray-700">February 14th • Dinner & Surprise ✨</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="absolute bottom-4 text-center w-full text-gray-400 text-sm">
+        Made with ❤️ for Janelle
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        // Floating Hearts Background
+        function createHearts() {
+            const container = document.getElementById('background-hearts');
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            container.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 7000);
+        }
+        setInterval(createHearts, 300);
+
+        // Navigation
+        function nextStep() {
+            document.getElementById('step-1').classList.add('hidden');
+            document.getElementById('step-2').classList.remove('hidden');
+            document.getElementById('step-2').classList.add('animate-fade-in-up');
+        }
+
+        // The Dodge Logic
+        let noCount = 0;
+        const noTexts = [
+            "WAAAAA",
+            "PLSSSSS :3",
+            "U HATE MEH",
+            "U HATE MEH",
+            "i loiks u :3",
+            "I BUY U LEON KENNEDY IF U SAY YES",
+            "MIMIIIIIIIIII",
+            "i kibs u :3"
+        ];
+
+        function dodgeNo() {
+            const btn = document.getElementById('no-btn');
+            const yesBtn = document.getElementById('yes-btn');
+            
+            // Random position within container
+            const x = (Math.random() - 0.5) * 200;
+            const y = (Math.random() - 0.5) * 200;
+            
+            btn.style.transform = `translate(${x}px, ${y}px)`;
+            
+            // Make Yes button bigger
+            const currentScale = 1 + (noCount * 0.1);
+            yesBtn.style.transform = `scale(${currentScale})`;
+            
+            // Change No button text
+            btn.innerText = noTexts[noCount % noTexts.length];
+            noCount++;
+        }
+
+        // Success
+        function acceptProposal() {
+            document.getElementById('step-2').classList.add('hidden');
+            document.getElementById('step-3').classList.remove('hidden');
+            
+            // Trigger Confetti
+            var duration = 3 * 1000;
+            var animationEnd = Date.now() + duration;
+            var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+            var random = function(min, max) {
+              return Math.random() * (max - min) + min;
+            }
+
+            var interval = setInterval(function() {
+              var timeLeft = animationEnd - Date.now();
+
+              if (timeLeft <= 0) {
+                return clearInterval(interval);
+              }
+
+              var particleCount = 50 * (timeLeft / duration);
+              // since particles fall down, start a bit higher than random
+              confetti(Object.assign({}, defaults, { particleCount, origin: { x: random(0.1, 0.3), y: Math.random() - 0.2 } }));
+              confetti(Object.assign({}, defaults, { particleCount, origin: { x: random(0.7, 0.9), y: Math.random() - 0.2 } }));
+            }, 250);
+        }
+    </script>
+</body>
+</html>
